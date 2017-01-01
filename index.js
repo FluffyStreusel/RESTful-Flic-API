@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
 
+// Variables
 var viewPages = __dirname + '/viewapp/';
+var apiDirectory = '/api';
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -17,15 +19,15 @@ app.get('/', function(req, res) {
   res.sendFile(viewPages + 'index.html');
 });
 
-app.get('/api', function(req, res) {
+app.get(apiDirectory, function(req, res) {
   res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Endpoint not found.' } ]);
 });
 
-app.get('api/btn/status', function(req, res) {
+app.get(apiDirectory + '/btn/status', function(req, res) {
   res.json(statuses);
 });
 
-app.post('api/btn/press', function(req, res) {
+app.post(apiDirectory + '/btn/press', function(req, res) {
   boolValue = true;
   statuses = [
     { PressedState: boolValue },
