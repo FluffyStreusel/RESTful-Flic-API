@@ -12,7 +12,7 @@ statuses = [
 ];
 
 app.get('/', function(req, res) {
-  res.json([ { ErrorCode: '400'}, { ErrorMessage: 'Bad request. Cannot get status of null.' } ]);
+  res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Endpoint not found.' } ]);
 });
 
 app.get('/btn/status', function(req, res) {
