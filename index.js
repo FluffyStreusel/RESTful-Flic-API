@@ -11,15 +11,15 @@ statuses = [
   { PressedState: boolValue },
 ];
 
-app.get('/', function(req, res) {
+app.get('/api', function(req, res) {
   res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Endpoint not found.' } ]);
 });
 
-app.get('/btn/status', function(req, res) {
+app.get('api/btn/status', function(req, res) {
   res.json(statuses);
 });
 
-app.post('/btn/press', function(req, res) {
+app.post('api/btn/press', function(req, res) {
   boolValue = true;
   statuses = [
     { PressedState: boolValue },
