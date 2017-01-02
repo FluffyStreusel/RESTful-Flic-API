@@ -12,6 +12,12 @@ var boolValue = false;
 
 var statuses;
 
+var buttonIdentifiers;
+
+buttonIdentifiers = [
+  { id: 1, Name: 'Flic#1', WebPointer: '953175' }
+];
+
 statuses = [
   { PressedState: boolValue },
 ];
@@ -22,6 +28,10 @@ router.get('/', function(req, res) {
 
 app.get(apiDirectory, function(req, res) {
   res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Endpoint not found or supplied.' } ]);
+});
+
+app.get(apiDirectory + "/btn/:id", function(req, res) {
+  res.send({buttonIdentifiers[id]});
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
