@@ -44,7 +44,7 @@ app.get(apiDirectory, function(req, res) {
 });
 
 app.get(apiDirectory + "/btn/:id", function(req, res) {
-  if (req.params.id > (buttonIdentifiers.length + 1)) {
+  if (req.params.id >= (buttonIdentifiers.length)) {
     res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Button does not exist.' } ]);
   } else {
     res.send(buttonIdentifiers[req.params.id]);
