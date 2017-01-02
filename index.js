@@ -49,7 +49,7 @@ app.get(apiDirectory + "/btn/:id", function(req, res) {
 
 app.get(apiDirectory + "/btn/:id/status", function(req, res) {
   var btn = buttonIdentifiers[req.params.id];
-  res.send(btn[3]);
+  res.send(btn[3][1]);
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
