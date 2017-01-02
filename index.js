@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var router = express.Router();
 
 // Variables
 var viewPages = __dirname + '/viewapp/';
@@ -15,16 +16,12 @@ statuses = [
   { PressedState: boolValue },
 ];
 
-app.get('/', function(req, res) {
+router.get('/', function(req, res) {
   res.sendFile(viewPages + 'index.html');
 });
 
-app.use('*', function(req, res) {
-  res.sendFile(viewPages + '404.html');
-});
-
 app.get(apiDirectory, function(req, res) {
-  res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Endpoint not found.' } ]);
+  res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Endpoint not found or supplied.' } ]);
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
@@ -45,6 +42,9 @@ app.post(apiDirectory + '/btn/press', function(req, res) {
   res.send('Button press: successful (200 OK)');
 });
 
+app.use('*', function(req, res) {
+  res.sendFile(viewPages + '404.html');
+});
 
 app.listen(app.get('port'), function() {
   console.log('Flic RESTful API is running on port ', app.get('port'), '.');
