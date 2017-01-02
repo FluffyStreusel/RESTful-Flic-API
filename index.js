@@ -15,7 +15,7 @@ var statuses;
 var buttonIdentifiers;
 
 buttonIdentifiers = [
-  { id: 1, Name: 'Flic#1', WebPointer: '953175' }
+  { Name: 'Flic#1', WebPointer: '953175' }
 ];
 
 statuses = [
@@ -31,7 +31,7 @@ app.get(apiDirectory, function(req, res) {
 });
 
 app.get(apiDirectory + "/btn/:id", function(req, res) {
-  res.send(buttonIdentifiers[id]);
+  res.send(buttonIdentifiers[req.params.id]);
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
