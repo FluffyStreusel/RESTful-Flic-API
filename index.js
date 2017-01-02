@@ -15,7 +15,9 @@ var statuses;
 var buttonIdentifiers;
 
 buttonIdentifiers = [
-  { Name: 'Flic#1', WebPointer: '953175' }
+  { Error: '400', Information: 'Bad request. Button IDs should start at #1.' },
+  { Name: 'Flic#1', WebPointer: '3014833' },
+  { Name: 'Flic#2', WebPointer: '3277162' }
 ];
 
 statuses = [
