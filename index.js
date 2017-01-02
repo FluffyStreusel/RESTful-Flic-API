@@ -15,7 +15,7 @@ var statuses;
 var buttonIdentifiers;
 
 buttonIdentifiers = [
-  { Error: '400', Information: 'Bad request. Button IDs should start at #1.' },
+  { Error: '400', ErrorMessage: 'Bad request. Button IDs must start at 1.' },
   { id: 1, Name: 'Flic#1', WebPointer: '3014833', PressedState: { Pressed: 'null' } },
   { id: 2, Name: 'Flic#2', WebPointer: '3277162', PressedState: { Pressed: 'null' } }
 ];
@@ -44,7 +44,11 @@ app.get(apiDirectory, function(req, res) {
 });
 
 app.get(apiDirectory + "/btn/:id", function(req, res) {
-  res.send(buttonIdentifiers[req.params.id]);
+  if (req.params.id > buttonIdentifiers.length) {
+    res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Button does not exist.' } ]);
+  } else {
+    res.send(buttonIdentifiers[req.params.id]);
+  }
 });
 
 app.get(apiDirectory + "/btn/:id/status", function(req, res) {
