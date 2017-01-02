@@ -20,9 +20,11 @@ buttonIdentifiers = [
   { id: 2, Name: 'Flic#2', WebPointer: '3277162', PressedState: { Pressed: 'null' } }
 ];
 
+/*
 for (var d = 1; d < buttonIdentifiers.length; d++) {
-  buttonIdentifiers[d][3]['Pressed'] = false;
+  buttonIdentifiers[d][3][1] = false;
 }
+*/
 
 var btnStatuses = [
   { PressedState: true },
