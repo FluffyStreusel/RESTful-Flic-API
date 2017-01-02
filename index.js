@@ -19,6 +19,10 @@ app.get('/', function(req, res) {
   res.sendFile(viewPages + 'index.html');
 });
 
+app.use('*', function(req, res) {
+  res.sendFile(viewPages + '404.html');
+});
+
 app.get(apiDirectory, function(req, res) {
   res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Endpoint not found.' } ]);
 });
