@@ -31,7 +31,7 @@ app.get(apiDirectory, function(req, res) {
 });
 
 app.get(apiDirectory + "/btn/:id", function(req, res) {
-  res.send({buttonIdentifiers[id]});
+  res.send(buttonIdentifiers[id]);
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
