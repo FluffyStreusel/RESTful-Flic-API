@@ -47,15 +47,11 @@ app.get(apiDirectory + "/btn/:id", function(req, res) {
 
 app.get(apiDirectory + "/btn/:id/status", function(req, res) {
   var btn = buttonIdentifiers[req.params.id];
-  res.send(btn['PressedState']);
+  res.send(btn[3]);
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
   res.json(statuses);
-});
-
-app.post(apiDirectory + '/btn/:id/press', function(req, res) {
-  var btn = buttonIdentifier[req.params.id];
 });
 
 app.post(apiDirectory + '/btn/press', function(req, res) {
