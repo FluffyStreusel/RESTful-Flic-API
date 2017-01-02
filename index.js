@@ -16,12 +16,12 @@ var buttonIdentifiers;
 
 buttonIdentifiers = [
   { Error: '400', Information: 'Bad request. Button IDs should start at #1.' },
-  { Name: 'Flic#1', WebPointer: '3014833', { PressedState: 'null' } },
-  { Name: 'Flic#2', WebPointer: '3277162', { PressedState: 'null' } }
+  { id: 1, Name: 'Flic#1', WebPointer: '3014833', PressedState: { Pressed: 'null' } },
+  { id: 2, Name: 'Flic#2', WebPointer: '3277162', PressedState: { Pressed: 'null' } }
 ];
 
 for (var d = 1; d < buttonIdentifiers.length; d++) {
-  buttonIdentifiers[d][3]['PressedState'] = false;
+  buttonIdentifiers[d][3]['Pressed'] = false;
 }
 
 var btnStatuses = [
@@ -46,7 +46,8 @@ app.get(apiDirectory + "/btn/:id", function(req, res) {
 });
 
 app.get(apiDirectory + "/btn/:id/status", function(req, res) {
-  
+  var btn = buttonIdentifiers[req.params.id];
+  res.send(btn['PressedState']);
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
@@ -54,8 +55,7 @@ app.get(apiDirectory + '/btn/status', function(req, res) {
 });
 
 app.post(apiDirectory + '/btn/:id/press', function(req, res) {
-  var btnBool = btnStatuses;
-  var btn = req.
+  var btn = buttonIdentifier[req.params.id];
 });
 
 app.post(apiDirectory + '/btn/press', function(req, res) {
