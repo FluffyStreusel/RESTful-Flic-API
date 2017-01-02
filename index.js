@@ -45,7 +45,11 @@ app.get(apiDirectory, function(req, res) {
 
 app.get(apiDirectory + "/btn/:id", function(req, res) {
   if (req.params.id >= (buttonIdentifiers.length)) {
-    res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Button does not exist.' } ]);
+    res.json([ { ErrorCode: '400'}, { ErrorMessage: 'Bad Request: Button does not exist.' } ]);
+  } else if (req.params.id < 0) {
+    res.json([ { ErrorCode: '400'}, { ErrorMessage: 'Bad Request: Unexpected ID.' } ]);
+  } else if (!isNaN(req.params.id)) {
+    res.json([ { ErrorCode: '400'}, { ErrorMessage: 'Bad Request: ID must be a number.' } ]);
   } else {
     res.send(buttonIdentifiers[req.params.id]);
   }
