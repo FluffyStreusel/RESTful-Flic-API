@@ -42,6 +42,8 @@ app.post(apiDirectory + '/btn/press', function(req, res) {
   res.send('Button press: successful (200 OK)');
 });
 
+app.use("/",router);
+
 app.use('*', function(req, res) {
   res.sendFile(viewPages + '404.html');
 });
