@@ -28,7 +28,7 @@ var btnStatuses = [
   { PressedState: false }
 ];
 
-statuses = [
+var statuses = [
   { PressedState: false },
 ];
 
@@ -56,7 +56,8 @@ app.get(apiDirectory + "/btn/:id", function(req, res) {
 });
 
 app.get(apiDirectory + "/btn/:id/:property", function(req, res) {
-  if (!req.params.property) { res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: No property was supplied.' } ]); }
+  if (!req.params.property) {
+    res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: No property was supplied.' } ]);
   } else {
     res.json([ { WebPointer: buttonIdentifiers[req.params.id][req.params.property] } ]);
   }
@@ -85,7 +86,7 @@ app.post(apiDirectory + '/btn/press', function(req, res) {
   res.send('Button press: successful (200 OK)');
 });
 
-app.use("/",router);
+app.use("/", router);
 
 app.use('*', function(req, res) {
   res.sendFile(viewPages + '404.html');
