@@ -10,11 +10,17 @@ var boolValue;
 var statuses;
 var buttonIdentifiers;
 
+var statuses = [
+  'null',
+  'Enabled',
+  'Disabled',
+  'Processing'
+];
+
 buttonIdentifiers = [
   { Error: '400', ErrorMessage: 'Bad request. Button IDs must start at 1.' },
-  { id: 1337, Name: "", WebPointer: '', PressedState: '' },
-  { id: 1, Name: 'Flic#1', WebPointer: '3014833', PressedState: 'null' },
-  { id: 2, Name: 'Flic#2', WebPointer: '3277162', PressedState: 'null' }
+  { id: 1, Name: 'Flic', WebPointer: '3014833', ButtonState: null, PressedState: false },
+  { id: 2, Name: 'Flic', WebPointer: '3277162', ButtonState: null, PressedState: false }
 ];
 
 var btnStatuses = [
@@ -26,14 +32,17 @@ statuses = [
   { PressedState: false },
 ];
 
+// index.html (Main page)
 router.get('/', function(req, res) {
   res.sendFile(viewPages + 'index.html');
 });
 
+// /api (API Base)
 app.get(apiDirectory, function(req, res) {
   res.json([ { ErrorCode: '404'}, { ErrorMessage: 'Endpoint not found or supplied.' } ]);
 });
 
+// /btn/(id) (1, 2, etc.) Basically just gets data from buttonIdentifiers table.
 app.get(apiDirectory + "/btn/:id", function(req, res) {
   if (req.params.id >= (buttonIdentifiers.length)) {
     res.json([ { ErrorCode: '400'}, { ErrorMessage: 'Bad Request: Button does not exist.' } ]);
@@ -47,13 +56,19 @@ app.get(apiDirectory + "/btn/:id", function(req, res) {
 });
 
 app.get(apiDirectory + "/btn/:id/:property", function(req, res) {
-  if (!req.params.property) { res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: No property was supplied.' } ]); } else {
+  if (!req.params.property) { res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: No property was supplied.' } ]); }
+  } else {
     res.json([ { WebPointer: buttonIdentifiers[req.params.id][req.params.property] } ]);
   }
 });
 
-app.get(apiDirectory + '/btn/status', function(req, res) {
-  res.json(statuses);
+app.post(apiDirectory + '/btn/:id/press', function(req, res) {
+  if (req.params.id && req.params.id > 0) {
+    buttonIdentifiers[req.params.id]['PressedState'] = true;
+    setTimeout(function() {
+      buttonIdentifiers[req.params.id]['PressedState'] = false;
+    }, 6000);
+  }
 });
 
 app.post(apiDirectory + '/btn/press', function(req, res) {
