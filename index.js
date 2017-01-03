@@ -64,11 +64,13 @@ app.get(apiDirectory + "/btn/:id/:property", function(req, res) {
 });
 
 app.post(apiDirectory + '/btn/:id/press', function(req, res) {
-  if (req.params.id && req.params.id > 0) {
+  if (req.params.id && req.params.id > 0 && buttonIdentifiers[req.params.id]['ButtonState'] === 'Enabled') {
     buttonIdentifiers[req.params.id]['PressedState'] = true;
     setTimeout(function() {
       buttonIdentifiers[req.params.id]['PressedState'] = false;
     }, 6000);
+  } else {
+    res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: ID was not greater than zero, ID was not supplied, button was not enabled, or some other error occured.' } ]);
   }
 });
 
