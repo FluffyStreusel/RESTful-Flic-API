@@ -58,7 +58,7 @@ app.get(apiDirectory + "/btn/:id/:property", function(req, res) {
 });
 
 app.post(apiDirectory + '/btn/:id/press', function(req, res) {
-  if (req.params.id && req.params.id > 0 && buttonIdentifiers[req.params.id]['ButtonState'] === btnStatuses[2]) {
+  if (req.params.id && req.params.id > 0 && buttonIdentifiers[req.params.id]['ButtonState'] === btnStatuses[1]) {
     buttonIdentifiers[req.params.id]['PressedState'] = true;
     setTimeout(function() {
       buttonIdentifiers[req.params.id]['PressedState'] = false;
