@@ -59,10 +59,10 @@ app.get(apiDirectory + "/btn/:id/:property", function(req, res) {
   if (!req.params.property) {
     res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: No property was supplied.' } ]);
   } else {
-    var prop = req.params.property.toString();
+    var prop = req.params.property;
     var name = prop;
     var variabled = {
-      [name] : buttonIdentifiers[req.params.id][req.params.property];
+      [name]: buttonIdentifiers[req.params.id][req.params.property];
     }
     res.json(variabled);
   }
