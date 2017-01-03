@@ -55,9 +55,9 @@ app.get(apiDirectory + "/btn/:id", function(req, res) {
   }
 });
 
-app.get(apiDirectory + "/btn/:id/status", function(req, res) {
-  var btn = buttonIdentifiers[req.params.id];
-  res.send(btn[4]);
+app.get(apiDirectory + "/btn/:id/wpointer", function(req, res) {
+  var btnA = buttonIdentifiers[req.params.id];
+  res.send(btnA[3]);
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
