@@ -17,8 +17,15 @@ var btnStatuses = [
 
 buttonIdentifiers = [
   { Error: '400', ErrorMessage: 'Bad request. Button IDs must start at 1.' },
-  { id: 1, Name: 'Flic', WebPointer: '3014833', ButtonState: 'Enabled', PressedState: false }, // Test Flic
-  { id: 2, Name: 'Flic', WebPointer: '3277162', ButtonState: null, PressedState: false }
+  { id: 1, Name: 'Flic', ButtonState: 'Enabled', PressedState: false }, // Test Flic
+  { id: 2, Name: 'Flic', ButtonState: null, PressedState: false }
+];
+
+// These are basically passwords, the 'Secret' keys.
+var privateWebpointers = [
+  { Error: '400', ErrorMessage: 'Bad request. Secret IDs cannot be less than 1.' },
+  { id: 1, Secret: 'zbMvA2N50TUadTt', WebPointer: 301833 },
+  { id: 2, Secret: 'TvgAnExafNXo8a6', WebPointer: 134783 }
 ];
 
 // index.html (Main page)
