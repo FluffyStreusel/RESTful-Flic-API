@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.2.5",
-  "description": "A sample Node.js app using Express 4",
+  "name": "RESTful Flic API",
+  "version": "1.0",
+  "description": "API Thingy for Flic Buttons (or really any other on/off switches).",
   "engines": {
     "node": "5.9.1"
   },
@@ -10,7 +10,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "ejs": "2.4.1",
     "express": "4.13.3",
     "pg-promise": "5.5.0"
   },

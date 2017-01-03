@@ -1,3 +1,4 @@
+// index.js, (2017, Stormersoul)
 var express = require('express');
 var app = express();
 var router = express.Router();
@@ -5,13 +6,8 @@ var router = express.Router();
 // Variables
 var viewPages = __dirname + '/viewapp/';
 var apiDirectory = '/api';
-
-app.set('port', (process.env.PORT || 5000));
-
-var boolValue = false;
-
+var boolValue;
 var statuses;
-
 var buttonIdentifiers;
 
 buttonIdentifiers = [
@@ -21,19 +17,13 @@ buttonIdentifiers = [
   { id: 2, Name: 'Flic#2', WebPointer: '3277162', PressedState: 'null' }
 ];
 
-/*
-for (var d = 1; d < buttonIdentifiers.length; d++) {
-  buttonIdentifiers[d][3][1] = false;
-}
-*/
-
 var btnStatuses = [
   { PressedState: true },
   { PressedState: false }
 ];
 
 statuses = [
-  { PressedState: boolValue },
+  { PressedState: false },
 ];
 
 router.get('/', function(req, res) {
@@ -56,8 +46,10 @@ app.get(apiDirectory + "/btn/:id", function(req, res) {
   }
 });
 
-app.get(apiDirectory + "/btn/:id/wpointer", function(req, res) {
-  res.json([ { WebPointer: buttonIdentifiers[req.params.id]['WebPointer'] } ]);
+app.get(apiDirectory + "/btn/:id/:property", function(req, res) {
+  if (!req.params.property) { res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: No property was supplied.' } ]); } else {
+    res.json([ { WebPointer: buttonIdentifiers[req.params.id][req.params.property] } ]);
+  }
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
@@ -83,6 +75,8 @@ app.use("/",router);
 app.use('*', function(req, res) {
   res.sendFile(viewPages + '404.html');
 });
+
+app.set('port', (process.env.PORT || 5000));
 
 app.listen(app.get('port'), function() {
   console.log('Flic RESTful API is running on port ', app.get('port'), '.');
