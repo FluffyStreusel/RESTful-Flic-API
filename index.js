@@ -56,8 +56,7 @@ app.get(apiDirectory + "/btn/:id", function(req, res) {
 });
 
 app.get(apiDirectory + "/btn/:id/wpointer", function(req, res) {
-  var btnA = buttonIdentifiers[req.params.id];
-  res.send(btnA[3]);
+  res.send(buttonIdentifiers[req.params.id]['WebPointer']);
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
