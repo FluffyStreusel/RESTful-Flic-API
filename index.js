@@ -19,7 +19,7 @@ var statuses = [
 
 buttonIdentifiers = [
   { Error: '400', ErrorMessage: 'Bad request. Button IDs must start at 1.' },
-  { id: 1, Name: 'Flic', WebPointer: '3014833', ButtonState: null, PressedState: false },
+  { id: 1, Name: 'Flic', WebPointer: '3014833', ButtonState: 'Enabled', PressedState: false }, // Test Flic
   { id: 2, Name: 'Flic', WebPointer: '3277162', ButtonState: null, PressedState: false }
 ];
 
@@ -73,7 +73,7 @@ app.post(apiDirectory + '/btn/:id/press', function(req, res) {
     buttonIdentifiers[req.params.id]['PressedState'] = true;
     setTimeout(function() {
       buttonIdentifiers[req.params.id]['PressedState'] = false;
-    }, 6000);
+    }, 3000);
   } else {
     res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: ID was not greater than zero, ID was not supplied, button was not enabled, or some other error occured.' } ]);
   }
