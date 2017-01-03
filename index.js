@@ -57,7 +57,7 @@ app.get(apiDirectory + '/btn/:id', function(req, res) {
   if (checkId === 0) {
     res.send(buttonIdentifiers[req.params.id]);
   } else {
-    res.json([ { ErrorCode: '400'}, { ErrorMessage: 'An error ocurred..' } ]);
+    res.json([ { ErrorCode: '400'}, { ErrorMessage: 'An error ocurred.' } ]);
   }
 });
 
@@ -66,6 +66,8 @@ app.get(apiDirectory + '/btn/:id', function(req, res) {
 app.get(apiDirectory + "/btn/:id/:property", function(req, res) {
   if (!req.params.property) {
     res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: No property was supplied.' } ]);
+  } else if (!buttonIdentifiers[req.params.id][req.params.property]) {
+    res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: Property does not exist.' } ]);
   } else {
     var prop = req.params.property;
     var name = prop;
