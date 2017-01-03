@@ -39,17 +39,29 @@ app.get(apiDirectory, function(req, res) {
 });
 
 // /btn/(id) (1, 2, etc.) Basically just gets data from buttonIdentifiers table.
-app.get(apiDirectory + "/btn/:id", function(req, res) {
-  if (req.params.id >= (buttonIdentifiers.length)) {
-    res.json([ { ErrorCode: '400'}, { ErrorMessage: 'Bad Request: Button does not exist.' } ]);
-  } else if (req.params.id < 0) {
-    res.json([ { ErrorCode: '400'}, { ErrorMessage: 'Bad Request: ID cannot be under 1.' } ]);
-  } else if (isNaN(req.params.id)) {
-    res.json([ { ErrorCode: '400'}, { ErrorMessage: 'Bad Request: ID must be a number.' } ]);
+
+function sanitizeId(id) {
+  if (id < 0) {
+    return 1; // ID is negative
+  } else if (isNaN(id)) {
+    return 2; // ID is not a number
+  } else if (id >= buttonIdentifiers.length) {
+    return 3; // ID is too large, entry doesn't exist
   } else {
+    return 0; // ID is safe
+  }
+}
+
+app.get(apiDirectory + '/btn/:id', function(req, res) {
+  var checkId = sanitizeId(req.params.id);
+  if (checkId === 0) {
     res.send(buttonIdentifiers[req.params.id]);
+  } else {
+    res.json([ { ErrorCode: '400'}, { ErrorMessage: 'An error ocurred..' } ]);
   }
 });
+
+// End ID Sanitization etc
 
 app.get(apiDirectory + "/btn/:id/:property", function(req, res) {
   if (!req.params.property) {
