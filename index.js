@@ -16,8 +16,9 @@ var buttonIdentifiers;
 
 buttonIdentifiers = [
   { Error: '400', ErrorMessage: 'Bad request. Button IDs must start at 1.' },
-  { id: 1, Name: 'Flic#1', WebPointer: '3014833', PressedState: { Pressed: 'null' } },
-  { id: 2, Name: 'Flic#2', WebPointer: '3277162', PressedState: { Pressed: 'null' } }
+  { id: 1337, Name: "", WebPointer: '', PressedState: '' },
+  { id: 1, Name: 'Flic#1', WebPointer: '3014833', PressedState: 'null' },
+  { id: 2, Name: 'Flic#2', WebPointer: '3277162', PressedState: 'null' }
 ];
 
 /*
