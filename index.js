@@ -6,11 +6,9 @@ var router = express.Router();
 // Variables
 var viewPages = __dirname + '/viewapp/';
 var apiDirectory = '/api';
-var boolValue;
-var statuses;
 var buttonIdentifiers;
 
-var statuses = [
+var btnStatuses = [
   'null',
   'Enabled',
   'Disabled',
@@ -21,15 +19,6 @@ buttonIdentifiers = [
   { Error: '400', ErrorMessage: 'Bad request. Button IDs must start at 1.' },
   { id: 1, Name: 'Flic', WebPointer: '3014833', ButtonState: 'Enabled', PressedState: false }, // Test Flic
   { id: 2, Name: 'Flic', WebPointer: '3277162', ButtonState: null, PressedState: false }
-];
-
-var btnStatuses = [
-  { PressedState: true },
-  { PressedState: false }
-];
-
-var statuses = [
-  { PressedState: false },
 ];
 
 // index.html (Main page)
@@ -69,32 +58,20 @@ app.get(apiDirectory + "/btn/:id/:property", function(req, res) {
 });
 
 app.post(apiDirectory + '/btn/:id/press', function(req, res) {
-  if (req.params.id && req.params.id > 0 && buttonIdentifiers[req.params.id]['ButtonState'] === 'Enabled') {
+  if (req.params.id && req.params.id > 0 && buttonIdentifiers[req.params.id]['ButtonState'] === btnStatuses[2]) {
     buttonIdentifiers[req.params.id]['PressedState'] = true;
     setTimeout(function() {
       buttonIdentifiers[req.params.id]['PressedState'] = false;
     }, 3000);
+    res.send('Button was pushed. Hooray!');
   } else {
-    res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: ID was not greater than zero, ID was not supplied, button was not enabled, or some other error occured.' } ]);
+    res.json([ { ErrorCode: '400' }, { ErrorMessage: 'Bad Request: Some error ocurred. Sorry for ya. (Error Code: 1)' } ]); // Err Code 1: Not enabled, bad ID, or ID not supplied
   }
 });
 
-app.post(apiDirectory + '/btn/press', function(req, res) {
-  boolValue = true;
-  statuses = [
-    { PressedState: boolValue },
-  ];
-  setTimeout(function() {
-    boolValue = false;
-    statuses = [
-      { PressedState: boolValue },
-    ];
-  }, 1000);
-  res.send('Button press: successful (200 OK)');
-});
+app.use("/", router); // For webpages
 
-app.use("/", router);
-
+// 404.html
 app.use('*', function(req, res) {
   res.sendFile(viewPages + '404.html');
 });
