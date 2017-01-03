@@ -62,8 +62,8 @@ app.get(apiDirectory + "/btn/:id/:property", function(req, res) {
     var prop = req.params.property;
     var name = prop;
     var variabled = {
-      [name]: buttonIdentifiers[req.params.id][req.params.property];
-    }
+      [name]: buttonIdentifiers[req.params.id][req.params.property]
+    };
     res.json(variabled);
   }
 });
