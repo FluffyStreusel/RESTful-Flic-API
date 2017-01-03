@@ -57,7 +57,7 @@ app.get(apiDirectory + "/btn/:id", function(req, res) {
 
 app.get(apiDirectory + "/btn/:id/status", function(req, res) {
   var btn = buttonIdentifiers[req.params.id];
-  res.json(btn[4]);
+  res.send(btn[4]);
 });
 
 app.get(apiDirectory + '/btn/status', function(req, res) {
