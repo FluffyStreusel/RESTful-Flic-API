@@ -90,9 +90,11 @@ app.post(apiDirectory + '/btn/:id/press', function(req, res) {
   }
 });
 
-app.get(apiDirectory + '/get/bust/:id', function(req, res) {
+app.get(apiDirectory + '/bust/:id', function(req, res) {
   if (!req.params.id) {
-    res.json([ { Error: 'No ID provided.' } ]);
+    res.json([{}]);
+  } else {
+    res.json([{}]);
   }
 });
 
