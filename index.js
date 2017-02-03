@@ -90,12 +90,8 @@ app.post(apiDirectory + '/btn/:id/press', function(req, res) {
   }
 });
 
-app.get(apiDirectory + '/bust/:id', function(req, res) {
-  if (!req.params.id) {
-    res.json([{}]);
-  } else {
-    res.json([{}]);
-  }
+app.get('/external/:id', function(req, res) {
+  res.json([{ id: req.params.id }]);
 });
 
 app.use("/", router); // For webpages
